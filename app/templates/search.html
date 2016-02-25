@@ -1,0 +1,24 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Buscar</h1>
+  <form action="result" method="post" name="login">
+      <p>
+          Por favor, introduzca Nombre, Apellido o Empresa:<br>
+          <input type="text" name="whereData">
+      </p>
+      <p><input type="submit" value="Buscar"></p>
+  </form>
+
+{% if where_data %}
+    {% for dataset in where_data['rows'] %}
+        {% for field in dataset['f'] %}
+            {{ field['v'] }}
+            <br>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
+
