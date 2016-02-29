@@ -1,3 +1,5 @@
 #!flask/bin/python
 from app import app
-app.run(debug=True)
+app.debug = False
+#app.run()
+app.run(host='10.185.48.148')

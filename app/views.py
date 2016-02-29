@@ -17,7 +17,7 @@ def query(where_data,cadena):
     # OBTAIN THE KEY FROM THE GOOGLE APIs CONSOLE
     # More instructions here: http://goo.gl/w0YA0
     #f = file('key.p12', 'rb')
-    f = file('/home/itirados/Development/bigquery/Big-Data-Spain-0471aefb46fe.p12','rb')
+    f = file('/home/ubuntu/bigquery/Big-Data-Spain-0471aefb46fe.p12','rb')
     key = f.read()
     f.close()
 
@@ -69,5 +69,6 @@ def result():
     #return str(response)
     #return render_template('result',where_data=where_data)
 
-app.run(debug=True)
+#app.run(debug=True)
+app.run(debug=False,host='0.0.0.0')
 
