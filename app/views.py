@@ -45,7 +45,7 @@ def query(where_data,cadena):
         "kind": "bigquery#queryRequest", # The resource type of the request.
         "datasetId": "big_data_spain_16", # [Required] A unique ID for this dataset, without the project name. 
         "maxResults": 42, # [Optional] 
-        "query": "SELECT FirstName, LastName, Company, Email FROM [big-data-spain:big_data_spain_16.events_all_editions_normalize] WHERE FirstName LIKE '%{where_data}%' OR FirstName LIKE '%{cadena}%' OR LastName LIKE '%{where_data}%' OR LastName LIKE '%{cadena}%' OR Company LIKE '%{where_data}%' OR Company LIKE '%{cadena}%' IGNORE CASE".format(where_data=where_data,cadena=cadena), 
+        "query": "SELECT Event, Source, FirstName, LastName, Company, Email FROM [big-data-spain:big_data_spain_16.events_all_editions_normalize] WHERE FirstName LIKE '%{where_data}%' OR FirstName LIKE '%{cadena}%' OR LastName LIKE '%{where_data}%' OR LastName LIKE '%{cadena}%' OR Company LIKE '%{where_data}%' OR Company LIKE '%{cadena}%' IGNORE CASE".format(where_data=where_data,cadena=cadena), 
   }
 
     #Para hacer consultas, debemos utilizar jobs
