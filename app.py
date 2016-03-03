@@ -1,4 +1,4 @@
-from flask import render_template, request, Flask
+from flask import render_template, request, Flask, Response
 from unidecode import unidecode
 
 from googleapiclient.discovery import build
@@ -46,6 +46,21 @@ def result():
     return render_template('search.html', results=results, search_term=search_term)
 
 
+@app.route('/csv', methods=['GET'])
+def download_csv():
+    search_term = request.args.get('search_term')
+    results = query(search_term)
+    csv = 'Event;Source;FirstName;LastName;Company;Email\n'
+
+    for row in results.get('rows', {}):
+        csv += ';'.join([field['v'] for field in row['f']])
+        csv += '\n'
+
+    response = Response(csv,
+                        mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=export.csv"})
+    return response
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
