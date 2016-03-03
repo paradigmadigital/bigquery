@@ -1,0 +1,46 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Buscador</h2>
+
+<form action="" method="post" name="" class="form-inline">
+    <div class="form-group">
+        <label for="search_term">Nombre, apellido o empresa</label>
+        <input type="text" class="form-control" id="search_term" name="search_term" placeholder="Nombre, apellido o empresa" value="{{ search_term }}">
+    </div>
+    <button type="submit" class="btn btn-default">Buscar</button>
+</form>
+
+Las mayúsculas, tildes y la puntuación serán normalizadas.<br>
+
+{% if results %}
+    <hr/>
+    <h2>Resultados: "{{ search_term }}"</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Source</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Company</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for row in results['rows'] %}
+                <tr>
+                    {% for field in row['f'] %}
+                        <td>{{ field['v'] }}</td>
+                    {% endfor %}
+                </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+    </div>
+{% endif %}
+
+{% endblock %}
