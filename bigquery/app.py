@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from oauth2client.client import GoogleCredentials
 
-from .auth import requires_auth
+from auth import requires_auth
 
 app = Flask(__name__)
 
