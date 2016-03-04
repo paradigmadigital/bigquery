@@ -11,9 +11,9 @@
         <input type="text" class="form-control" id="search_term" name="search_term" placeholder="Nombre, apellido o empresa" value="{{ search_term }}">
     </div>
     <button type="submit" class="btn btn-default">Buscar</button>
+    <p>Las mayúsculas, tildes y la puntuación serán normalizadas.</p>
 </form>
 
-Las mayúsculas, tildes y la puntuación serán normalizadas.<br>
 
 {% if results %}
     <hr/>
