@@ -34,7 +34,7 @@ Las mayúsculas, tildes y la puntuación serán normalizadas.<br>
               {% for row in results['rows'] %}
                 <tr>
                     {% for field in row['f'] %}
-                        <td>{{ field['v'] }}</td>
+                        <td>{{ field['v'] if field['v'] != None else 'n/a' }}</td>
                     {% endfor %}
                 </tr>
               {% endfor %}

@@ -1,9 +1,11 @@
-from flask import render_template, request, Flask, Response
+from flask import render_template, request, Flask, Response, redirect, url_for
 from unidecode import unidecode
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from oauth2client.client import GoogleCredentials
+
+from .auth import requires_auth
 
 app = Flask(__name__)
 
@@ -35,25 +37,38 @@ def query(search_term):
 
 
 @app.route('/', methods=['GET'])
+@requires_auth
 def search():
     return render_template('search.html')
 
 
 @app.route('/', methods=['POST'])
+@requires_auth
 def result():
-    search_term = unidecode(request.form.get("search_term"))
-    results = query(search_term)
+    search_term = unidecode(request.form.get("search_term")).strip()
+
+    if search_term:
+        results = query(search_term)
+    else:
+        results = None
+
     return render_template('search.html', results=results, search_term=search_term)
 
 
 @app.route('/csv', methods=['GET'])
+@requires_auth
 def download_csv():
-    search_term = request.args.get('search_term')
-    results = query(search_term)
+    search_term = request.args.get("search_term")
+
+    if search_term:
+        results = query(search_term)
+    else:
+        return redirect(url_for('search'))
+
     csv = 'Event;Source;FirstName;LastName;Company;Email\n'
 
     for row in results.get('rows', {}):
-        csv += ';'.join([field['v'] for field in row['f']])
+        csv += ';'.join([field['v'] if field['v'] is not None else '' for field in row['f']])
         csv += '\n'
 
     response = Response(csv,
