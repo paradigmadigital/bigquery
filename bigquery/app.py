@@ -47,7 +47,7 @@ def search():
 def result():
     search_term = unidecode(request.form.get("search_term")).strip()
 
-    if search_term:
+    if search_term and len(search_term) > 2:
         results = query(search_term)
     else:
         results = None
