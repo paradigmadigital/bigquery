@@ -1,1 +1,6 @@
-big-data-spain_9ac768329273.json
+*.json
+*.p12
+*.pem
+
+*.pyc
+.idea
