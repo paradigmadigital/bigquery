@@ -24,6 +24,7 @@ def query(search_term):
                 " WHERE FirstName LIKE '%{search_term}%'"
                 " OR LastName LIKE '%{search_term}%'"
                 " OR Company LIKE '%{search_term}%'"
+                " OR Email LIKE '%{search_term}%'"
                 " GROUP BY Event, Source, FirstName, LastName, Company, Email IGNORE CASE".format(search_term=search_term))
         }
 
